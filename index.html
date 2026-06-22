@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Srikanth Babu S N — Agentic AI Engineer</title>
+  <meta name="description" content="Srikanth Babu S N — Building Agentic AI Systems, RAG Pipelines, and Cloud Automation. M.Tech Software Engineering at VIT Vellore." />
+  <meta property="og:title" content="Srikanth Babu S N — Agentic AI Engineer" />
+  <meta property="og:description" content="Building Agentic AI Systems That Think, Retrieve, Reason, and Act." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Design Tokens ─────────────────────────────────────────────── */
+    :root {
+      --bg:        #030303;
+      --surface:   #0a0a0a;
+      --card:      #0f0f0f;
+      --card-hover:#141414;
+      --border:    rgba(255,255,255,0.07);
+      --border-hi: rgba(255,255,255,0.14);
+      --txt:       #f0f0f0;
+      --txt2:      #888;
+      --txt3:      #555;
+      --purple:    #8b5cf6;
+      --purple-dim:#6d28d9;
+      --cyan:      #06b6d4;
+      --green:     #10b981;
+      --amber:     #f59e0b;
+      --grad:      linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%);
+      --grad2:     linear-gradient(135deg, #6d28d9 0%, #0891b2 100%);
+      --font:      'Inter', system-ui, sans-serif;
+      --mono:      'JetBrains Mono', 'Fira Code', monospace;
+    }
+
+    /* ── Reset ─────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--txt);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img, svg { display: block; }
+    ul { list-style: none; }
+
+    /* ── Scrollbar ─────────────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: #222; border-radius: 2px; }
+
+    /* ── Layout ────────────────────────────────────────────────────── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 100px 0; }
+
+    /* ── NAV ───────────────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 18px 0;
+      border-bottom: 1px solid transparent;
+      transition: all 0.3s ease;
+    }
+    nav.scrolled {
+      background: rgba(3,3,3,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom-color: var(--border);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-size: 15px; font-weight: 700; letter-spacing: -0.02em;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .nav-links {
+      display: flex; gap: 32px;
+    }
+    .nav-links a {
+      font-size: 13px; font-weight: 500; color: var(--txt2);
+      transition: color 0.2s;
+      letter-spacing: 0.01em;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--txt); }
+    .nav-cta {
+      font-size: 13px; font-weight: 600;
+      padding: 8px 18px;
+      border: 1px solid var(--border-hi);
+      border-radius: 8px;
+      color: var(--txt);
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .nav-cta:hover { background: var(--border); }
+
+    /* ── HERO ──────────────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding-top: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; pointer-events: none;
+    }
+    .hero-glow {
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.12;
+    }
+    .hero-glow-1 {
+      top: -100px; left: -100px;
+      background: var(--purple);
+    }
+    .hero-glow-2 {
+      bottom: -100px; right: -100px;
+      background: var(--cyan);
+      opacity: 0.08;
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 64px;
+      width: 100%;
+    }
+    .hero-text { display: flex; flex-direction: column; }
+    .hero-photo-wrap {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-photo {
+      width: 320px;
+      height: 380px;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 20px;
+      border: 1px solid var(--border-hi);
+      box-shadow:
+        0 0 0 1px rgba(139,92,246,0.15),
+        0 32px 80px rgba(0,0,0,0.6),
+        inset 0 0 0 1px rgba(255,255,255,0.05);
+      filter: grayscale(8%);
+      transition: filter 0.3s;
+      display: block;
+    }
+    .hero-photo:hover { filter: grayscale(0%); }
+    .hero-photo-ring {
+      position: relative;
+      padding: 3px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(139,92,246,0.4) 0%, rgba(6,182,212,0.4) 100%);
+    }
+    .hero-photo-ring::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 23px;
+      background: linear-gradient(135deg, rgba(139,92,246,0.6), rgba(6,182,212,0.6));
+      z-index: -1;
+      filter: blur(12px);
+      opacity: 0.5;
+    }
+    @media (max-width: 900px) {
+      .hero-content { grid-template-columns: 1fr; gap: 40px; }
+      .hero-photo-wrap { order: -1; justify-content: flex-start; }
+      .hero-photo { width: 160px; height: 200px; border-radius: 14px; }
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px;
+      border: 1px solid rgba(139,92,246,0.3);
+      border-radius: 100px;
+      background: rgba(139,92,246,0.08);
+      font-size: 12px; font-weight: 500; color: var(--purple);
+      letter-spacing: 0.04em; text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .hero-badge-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--purple);
+      animation: pulse 2s ease infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+    .hero-name {
+      font-size: clamp(36px, 5.5vw, 64px);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      color: var(--txt);
+      margin-bottom: 16px;
+      white-space: nowrap;
+    }
+    .hero-headline {
+      font-size: clamp(16px, 2.5vw, 22px);
+      font-weight: 400;
+      color: var(--txt2);
+      max-width: 640px;
+      line-height: 1.55;
+      margin-bottom: 40px;
+    }
+    .hero-headline strong {
+      color: var(--txt);
+      font-weight: 600;
+    }
+    .hero-actions {
+      display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 56px;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 24px;
+      background: var(--grad);
+      border-radius: 10px;
+      font-size: 14px; font-weight: 600; color: #fff;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 24px;
+      border: 1px solid var(--border-hi);
+      border-radius: 10px;
+      font-size: 14px; font-weight: 500; color: var(--txt2);
+      transition: all 0.2s;
+    }
+    .btn-ghost:hover { color: var(--txt); border-color: var(--border-hi); background: var(--border); }
+    .hero-socials {
+      display: flex; align-items: center; gap: 20px;
+    }
+    .social-link {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 500; color: var(--txt3);
+      transition: color 0.2s;
+    }
+    .social-link:hover { color: var(--txt2); }
+    .social-divider { width: 1px; height: 14px; background: var(--border-hi); }
+
+    /* ── SECTION HEADER ────────────────────────────────────────────── */
+    .section-tag {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--purple);
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800; letter-spacing: -0.03em;
+      line-height: 1.1; color: var(--txt);
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 16px; color: var(--txt2);
+      max-width: 520px; line-height: 1.6;
+      margin-bottom: 56px;
+    }
+
+    /* ── IMPACT ────────────────────────────────────────────────────── */
+    #impact { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 56px;
+    }
+    .impact-cell {
+      background: var(--surface);
+      padding: 32px 28px;
+      transition: background 0.2s;
+    }
+    .impact-cell:hover { background: var(--card); }
+    .impact-num {
+      font-size: 42px; font-weight: 900; letter-spacing: -0.04em;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      line-height: 1; margin-bottom: 6px;
+    }
+    .impact-label { font-size: 13px; color: var(--txt2); font-weight: 500; }
+    .impact-sub { font-size: 12px; color: var(--txt3); margin-top: 4px; }
+
+    .tech-cloud {
+      display: flex; flex-wrap: wrap; gap: 10px;
+    }
+    .tech-pill {
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 12px; font-weight: 500; color: var(--txt2);
+      transition: all 0.2s;
+      font-family: var(--mono);
+    }
+    .tech-pill:hover { border-color: var(--border-hi); color: var(--txt); }
+    .tech-pill.ai { border-color: rgba(139,92,246,0.3); color: var(--purple); background: rgba(139,92,246,0.05); }
+    .tech-pill.cloud { border-color: rgba(6,182,212,0.3); color: var(--cyan); background: rgba(6,182,212,0.05); }
+    .tech-pill.infra { border-color: rgba(16,185,129,0.3); color: var(--green); background: rgba(16,185,129,0.05); }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ──────────────────────────────────────────────────── -->
+<nav id="nav">
+  <div class="container nav-inner">
+    <a href="#hero" class="nav-logo">srikanth.dev</a>
+    <ul class="nav-links">
+      <li><a href="#impact">Impact</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#architecture">Architecture</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#timeline">Timeline</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Get in touch →</a>
+  </div>
+</nav>
+
+<!-- ── HERO ────────────────────────────────────────────────────────── -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="hero-glow hero-glow-1"></div>
+    <div class="hero-glow hero-glow-2"></div>
+    <div class="hero-grid"></div>
+  </div>
+  <div class="container hero-content">
+    <!-- LEFT: text -->
+    <div class="hero-text">
+      <h1 class="hero-name">Srikanth Babu S N</h1>
+      <p class="hero-headline">
+        Building <strong>Agentic AI systems</strong> that think, retrieve, reason, and act —
+        from RAG pipelines with sub-200ms retrieval to event-driven
+        <strong>cloud automation</strong> that self-heals in under 2 minutes.
+      </p>
+      <div class="hero-actions">
+        <a href="srikanthbabu_Resume.pdf" download class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Resume
+        </a>
+        <a href="https://github.com/Srikanth-coder-max" target="_blank" class="btn-ghost">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+          GitHub
+        </a>
+        <a href="https://linkedin.com/in/srikanth-babu-s-n" target="_blank" class="btn-ghost">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+      <div class="hero-socials">
+        <a href="mailto:srikanthnarayanasamy60@gmail.com" class="social-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          srikanthnarayanasamy60@gmail.com
+        </a>
+        <span class="social-divider"></span>
+        <a href="tel:+916383423774" class="social-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.4 19.79 19.79 0 0 1 1.6 4.76 2 2 0 0 1 3.56 2.58l3-.01a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 10.1a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          +91 6383423774
+        </a>
+        <span class="social-divider"></span>
+        <span class="social-link">VIT Vellore · M.Tech SE · 8.27 CGPA</span>
+      </div>
+    </div>
+
+    <!-- RIGHT: photo -->
+    <div class="hero-photo-wrap">
+      <div class="hero-photo-ring">
+        <img
+          src="photo.jpg"
+          alt="Srikanth Babu S N"
+          class="hero-photo"
+          onerror="this.parentElement.style.display='none'"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── IMPACT ───────────────────────────────────────────────────────── -->
+<section id="impact">
+  <div class="container">
+    <p class="section-tag">Engineering Impact</p>
+    <h2 class="section-title">Systems shipped,<br/>not side projects.</h2>
+    <p class="section-sub">Three production-oriented AI systems built from scratch — each with real architecture, real tests, and real deployment pipelines.</p>
+
+    <div class="impact-grid">
+      <div class="impact-cell">
+        <div class="impact-num">3</div>
+        <div class="impact-label">Complete AI Systems</div>
+        <div class="impact-sub">Agentic, RAG, and Cloud automation</div>
+      </div>
+      <div class="impact-cell">
+        <div class="impact-num">66</div>
+        <div class="impact-label">Automated Tests</div>
+        <div class="impact-sub">100% pass rate on RAG system</div>
+      </div>
+      <div class="impact-cell">
+        <div class="impact-num">&lt;200ms</div>
+        <div class="impact-label">RAG Retrieval Latency</div>
+        <div class="impact-sub">FAISS vector search, 20–40 page docs</div>
+      </div>
+      <div class="impact-cell">
+        <div class="impact-num">&lt;2min</div>
+        <div class="impact-label">Cloud Recovery Time</div>
+        <div class="impact-sub">Auto-rollback via EventBridge + Lambda</div>
+      </div>
+      <div class="impact-cell">
+        <div class="impact-num">5+</div>
+        <div class="impact-label">LLM Providers Integrated</div>
+        <div class="impact-sub">Groq, Gemini, Ollama, OpenAI, Bedrock</div>
+      </div>
+      <div class="impact-cell">
+        <div class="impact-num">3</div>
+        <div class="impact-label">Live Tool Integrations</div>
+        <div class="impact-sub">Web search, Weather API, Todoist</div>
+      </div>
+    </div>
+
+    <div class="tech-cloud">
+      <span class="tech-pill ai">LangChain</span>
+      <span class="tech-pill ai">RAG Pipelines</span>
+      <span class="tech-pill ai">ChromaDB</span>
+      <span class="tech-pill ai">FAISS</span>
+      <span class="tech-pill ai">Groq API</span>
+      <span class="tech-pill ai">Gemini</span>
+      <span class="tech-pill ai">Ollama</span>
+      <span class="tech-pill ai">Prompt Engineering</span>
+      <span class="tech-pill ai">faster-whisper</span>
+      <span class="tech-pill ai">Tool Calling</span>
+      <span class="tech-pill">Python</span>
+      <span class="tech-pill">FastAPI</span>
+      <span class="tech-pill">Streamlit</span>
+      <span class="tech-pill">Docker</span>
+      <span class="tech-pill">GitHub Actions</span>
+      <span class="tech-pill cloud">AWS Lambda</span>
+      <span class="tech-pill cloud">CloudWatch</span>
+      <span class="tech-pill cloud">EventBridge</span>
+      <span class="tech-pill cloud">CodePipeline</span>
+      <span class="tech-pill cloud">CodeDeploy</span>
+      <span class="tech-pill cloud">EC2</span>
+      <span class="tech-pill cloud">IAM</span>
+      <span class="tech-pill infra">sentence-transformers</span>
+      <span class="tech-pill infra">Vector Embeddings</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── PROJECTS ─────────────────────────────────────────────────────── -->
+<style>
+  #projects { background: var(--bg); }
+  .project-card { border:1px solid var(--border); border-radius:20px; overflow:hidden; background:var(--card); margin-bottom:32px; transition:border-color 0.3s; }
+  .project-card:hover { border-color:var(--border-hi); }
+  .project-header { padding:36px 40px 28px; border-bottom:1px solid var(--border); }
+  .project-meta { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+  .project-tag { font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; padding:4px 10px; border-radius:6px; }
+  .tag-agent { background:rgba(139,92,246,0.12); color:var(--purple); }
+  .tag-rag   { background:rgba(6,182,212,0.12);  color:var(--cyan); }
+  .tag-cloud { background:rgba(16,185,129,0.12); color:var(--green); }
+  .project-date { font-size:12px; color:var(--txt3); font-family:var(--mono); }
+  .project-title { font-size:clamp(20px,3vw,28px); font-weight:800; letter-spacing:-0.03em; color:var(--txt); margin-bottom:10px; }
+  .project-hook { font-size:15px; color:var(--txt2); line-height:1.6; max-width:680px; }
+  .project-body { display:grid; grid-template-columns:1fr 1fr; }
+  @media(max-width:768px){ .project-body{ grid-template-columns:1fr; } }
+  .project-left { padding:32px 40px; border-right:1px solid var(--border); }
+  .project-right { padding:32px 40px; }
+  @media(max-width:768px){ .project-left{ border-right:none; border-bottom:1px solid var(--border); } .project-left,.project-right{ padding:24px; } .project-header{ padding:24px; } }
+  .proj-lbl { font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--txt3); margin-bottom:14px; }
+  .dlist { display:flex; flex-direction:column; gap:12px; }
+  .ditem { display:flex; gap:10px; align-items:flex-start; }
+  .dicon { width:20px; height:20px; flex-shrink:0; display:flex; align-items:center; justify-content:center; border-radius:5px; margin-top:1px; }
+  .dicon.p{ background:rgba(139,92,246,0.15); } .dicon.c{ background:rgba(6,182,212,0.15); } .dicon.g{ background:rgba(16,185,129,0.15); }
+  .dtxt { font-size:13.5px; color:var(--txt2); line-height:1.55; }
+  .dtxt strong { color:var(--txt); font-weight:600; }
+  .spills { display:flex; flex-wrap:wrap; gap:7px; margin-top:20px; }
+  .spill { font-family:var(--mono); font-size:11px; padding:4px 10px; border-radius:6px; background:rgba(255,255,255,0.04); color:var(--txt2); border:1px solid var(--border); }
+  .project-links { padding:20px 40px; border-top:1px solid var(--border); display:flex; gap:16px; align-items:center; }
+  @media(max-width:768px){ .project-links{ padding:20px 24px; } }
+  .plink { display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:500; color:var(--txt2); transition:color 0.2s; }
+  .plink:hover { color:var(--txt); }
+  .plink-demo { color:var(--purple); padding:6px 14px; border:1px solid rgba(139,92,246,0.3); border-radius:8px; transition:all 0.2s; }
+  .plink-demo:hover { background:rgba(139,92,246,0.1); }
+  .adiag { background:rgba(255,255,255,0.02); border:1px solid var(--border); border-radius:12px; padding:20px; margin-bottom:20px; overflow-x:auto; }
+  .adiag svg { min-width:320px; width:100%; height:auto; }
+</style>
+
+<section id="projects">
+  <div class="container">
+    <p class="section-tag">Featured Projects</p>
+    <h2 class="section-title">Three systems.<br/>Full-stack AI engineering.</h2>
+    <p class="section-sub" style="margin-bottom:56px;">Each project was designed with real architecture decisions, tested, containerized, and deployed — not just prototyped.</p>
+
+    <!-- PROJECT 1 -->
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-meta"><span class="project-tag tag-agent">Agentic AI + Voice</span><span class="project-date">March 2026</span></div>
+        <h3 class="project-title">ContextualVoice — AI Agent with RAG, Memory &amp; Tool Orchestration</h3>
+        <p class="project-hook">Most AI assistants are stateless and siloed. ContextualVoice solves context-loss by combining three-tier persistent memory, local document RAG, live web search, and voice I/O in a single orchestrated pipeline.</p>
+      </div>
+      <div class="project-body">
+        <div class="project-left">
+          <p class="proj-lbl">Architecture</p>
+          <div class="adiag">
+            <svg viewBox="0 0 460 260" xmlns="http://www.w3.org/2000/svg">
+              <defs><marker id="a1" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#555"/></marker></defs>
+              <rect x="8" y="110" width="66" height="34" rx="7" fill="#1a0d2e" stroke="#8b5cf6" stroke-width="1.2"/>
+              <text x="41" y="123" text-anchor="middle" fill="#c4b5fd" font-size="9" font-weight="600" font-family="monospace">USER</text>
+              <text x="41" y="136" text-anchor="middle" fill="#7c3aed" font-size="8" font-family="monospace">Voice/Text</text>
+              <rect x="100" y="96" width="68" height="34" rx="7" fill="#0d1f2e" stroke="#06b6d4" stroke-width="1.2"/>
+              <text x="134" y="109" text-anchor="middle" fill="#67e8f9" font-size="9" font-weight="600" font-family="monospace">STT</text>
+              <text x="134" y="122" text-anchor="middle" fill="#0891b2" font-size="8" font-family="monospace">Whisper</text>
+              <rect x="196" y="85" width="74" height="52" rx="7" fill="#1a1a0d" stroke="#f59e0b" stroke-width="1.2"/>
+              <text x="233" y="101" text-anchor="middle" fill="#fcd34d" font-size="9" font-weight="600" font-family="monospace">BRAIN</text>
+              <text x="233" y="114" text-anchor="middle" fill="#d97706" font-size="8" font-family="monospace">LLM Router</text>
+              <text x="233" y="127" text-anchor="middle" fill="#d97706" font-size="8" font-family="monospace">Groq/Gemini</text>
+              <rect x="100" y="162" width="68" height="48" rx="7" fill="#0d1a0d" stroke="#10b981" stroke-width="1.2"/>
+              <text x="134" y="178" text-anchor="middle" fill="#6ee7b7" font-size="9" font-weight="600" font-family="monospace">MEMORY</text>
+              <text x="134" y="191" text-anchor="middle" fill="#059669" font-size="8" font-family="monospace">Chat+Profile</text>
+              <text x="134" y="203" text-anchor="middle" fill="#059669" font-size="8" font-family="monospace">+ChromaDB</text>
+              <rect x="196" y="162" width="74" height="48" rx="7" fill="#0d1a2e" stroke="#3b82f6" stroke-width="1.2"/>
+              <text x="233" y="178" text-anchor="middle" fill="#93c5fd" font-size="9" font-weight="600" font-family="monospace">RAG</text>
+              <text x="233" y="191" text-anchor="middle" fill="#2563eb" font-size="8" font-family="monospace">ChromaDB</text>
+              <text x="233" y="203" text-anchor="middle" fill="#2563eb" font-size="8" font-family="monospace">Embeddings</text>
+              <rect x="300" y="76" width="76" height="100" rx="7" fill="#1a0d1a" stroke="#a855f7" stroke-width="1.2"/>
+              <text x="338" y="95" text-anchor="middle" fill="#d8b4fe" font-size="9" font-weight="600" font-family="monospace">TOOLS</text>
+              <text x="338" y="110" text-anchor="middle" fill="#9333ea" font-size="8" font-family="monospace">Web Search</text>
+              <text x="338" y="123" text-anchor="middle" fill="#9333ea" font-size="8" font-family="monospace">Weather API</text>
+              <text x="338" y="136" text-anchor="middle" fill="#9333ea" font-size="8" font-family="monospace">Todoist</text>
+              <text x="338" y="149" text-anchor="middle" fill="#9333ea" font-size="8" font-family="monospace">System Info</text>
+              <text x="338" y="165" text-anchor="middle" fill="#555" font-size="8" font-family="monospace">→ grounded ans.</text>
+              <rect x="402" y="110" width="50" height="34" rx="7" fill="#0d1f2e" stroke="#06b6d4" stroke-width="1.2"/>
+              <text x="427" y="123" text-anchor="middle" fill="#67e8f9" font-size="9" font-weight="600" font-family="monospace">TTS</text>
+              <line x1="74" y1="127" x2="99" y2="116" stroke="#555" stroke-width="1.2" marker-end="url(#a1)"/>
+              <line x1="168" y1="113" x2="195" y2="113" stroke="#555" stroke-width="1.2" marker-end="url(#a1)"/>
+              <line x1="233" y1="137" x2="168" y2="162" stroke="#555" stroke-width="1.2" marker-end="url(#a1)"/>
+              <line x1="233" y1="137" x2="233" y2="161" stroke="#555" stroke-width="1.2" marker-end="url(#a1)"/>
+              <line x1="270" y1="113" x2="299" y2="113" stroke="#555" stroke-width="1.2" marker-end="url(#a1)"/>
+              <line x1="376" y1="127" x2="401" y2="127" stroke="#555" stroke-width="1.2" marker-end="url(#a1)"/>
+              <path d="M134 162 L134 68 L196 68" stroke="#1a3a1a" stroke-width="1" fill="none" stroke-dasharray="3,3" marker-end="url(#a1)"/>
+            </svg>
+          </div>
+          <p class="proj-lbl">Key Engineering Decisions</p>
+          <div class="dlist">
+            <div class="ditem"><div class="dicon p"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><p class="dtxt"><strong>Three-tier memory</strong> — JSON short-term (10 turns), user profile, and Chroma vector archive for semantic cross-session recall</p></div>
+            <div class="ditem"><div class="dicon c"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><p class="dtxt"><strong>Provider-agnostic LLM</strong> — single env var switches Groq, Gemini, or Ollama without touching application code</p></div>
+            <div class="ditem"><div class="dicon g"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><p class="dtxt"><strong>Tool registry pattern</strong> — tools registered independently, brain fully decoupled from execution logic</p></div>
+            <div class="ditem"><div class="dicon p"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><p class="dtxt"><strong>Dual interface design</strong> — CLI (main.py) for terminal, Streamlit (app.py) for browser; FastAPI backend for optional API serving</p></div>
+          </div>
+        </div>
+        <div class="project-right">
+          <p class="proj-lbl">Highlights</p>
+          <div class="dlist" style="margin-bottom:24px;">
+            <div class="ditem"><div class="dicon g"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><p class="dtxt">3 live tool integrations: DuckDuckGo search, Weather API, Todoist NLP task management</p></div>
+            <div class="ditem"><div class="dicon g"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><p class="dtxt">Chroma vector archive makes conversation history semantically searchable across sessions</p></div>
+            <div class="ditem"><div class="dicon g"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><p class="dtxt">Live Streamlit deployment — browser-accessible with full voice mode and document upload</p></div>
+            <div class="ditem"><div class="dicon c"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><p class="dtxt"><strong>What it solves:</strong> stateless chatbots lose context; hallucinate on private docs; can't act on real-world tasks. This solves all three in one system.</p></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px;">
+            <div style="background:rgba(139,92,246,0.06);border:1px solid rgba(139,92,246,0.2);border-radius:10px;padding:14px;"><div style="font-size:26px;font-weight:900;color:#8b5cf6;letter-spacing:-0.03em;">3</div><div style="font-size:12px;color:var(--txt2);">Memory tiers</div></div>
+            <div style="background:rgba(6,182,212,0.06);border:1px solid rgba(6,182,212,0.2);border-radius:10px;padding:14px;"><div style="font-size:26px;font-weight:900;color:#06b6d4;letter-spacing:-0.03em;">3</div><div style="font-size:12px;color:var(--txt2);">Live tool integrations</div></div>
+            <div style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.2);border-radius:10px;padding:14px;"><div style="font-size:26px;font-weight:900;color:#10b981;letter-spacing:-0.03em;">5+</div><div style="font-size:12px;color:var(--txt2);">LLM providers</div></div>
+            <div style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.2);border-radius:10px;padding:14px;"><div style="font-size:26px;font-weight:900;color:#f59e0b;letter-spacing:-0.03em;">Live</div><div style="font-size:12px;color:var(--txt2);">Streamlit demo</div></div>
+          </div>
+          <div class="spills"><span class="spill">Python</span><span class="spill">LangChain</span><span class="spill">ChromaDB</span><span class="spill">faster-whisper</span><span class="spill">Groq API</span><span class="spill">Gemini</span><span class="spill">Ollama</span><span class="spill">FastAPI</span><span class="spill">Streamlit</span><span class="spill">sentence-transformers</span></div>
+        </div>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/Srikanth-coder-max/jarvis-ai-agent" target="_blank" class="plink"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>View Source</a>
+        <span style="color:var(--txt3)">·</span>
+        <a href="https://github.com/Srikanth-coder-max/jarvis-ai-agent" target="_blank" class="plink plink-demo">Live Demo on Streamlit →</a>
+      </div>
+    </div>
+
+    <!-- PROJECT 2 -->
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-meta"><span class="project-tag tag-rag">RAG · Production CI/CD</span><span class="project-date">November 2025</span></div>
+        <h3 class="project-title">Agentic RAG Document Intelligence System</h3>
+        <p class="project-hook">Turns a folder of PDFs into a grounded, citation-aware knowledge base. Anti-hallucination prompt engineering ensures the system says "I don't know" rather than inventing answers — validated by 66 automated tests at 100% pass rate.</p>
+      </div>
+      <div class="project-body">
+        <div class="project-left">
+          <p class="proj-lbl">Pipeline</p>
+          <div class="adiag">
+            <svg viewBox="0 0 460 200" xmlns="http://www.w3.org/2000/svg">
+              <defs><marker id="a2" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#555"/></marker></defs>
+              <rect x="6" y="70" width="64" height="54" rx="7" fill="#0d1a2e" stroke="#3b82f6" stroke-width="1.2"/>
+              <text x="38" y="89" text-anchor="middle" fill="#93c5fd" font-size="9" font-weight="600" font-family="monospace">PDF</text>
+              <text x="38" y="102" text-anchor="middle" fill="#2563eb" font-size="8" font-family="monospace">ingest.py</text>
+              <text x="38" y="115" text-anchor="middle" fill="#2563eb" font-size="8" font-family="monospace">kb.py</text>
+              <rect x="88" y="70" width="64" height="54" rx="7" fill="#1a1a0d" stroke="#f59e0b" stroke-width="1.2"/>
+              <text x="120" y="89" text-anchor="middle" fill="#fcd34d" font-size="9" font-weight="600" font-family="monospace">CHUNK</text>
+              <text x="120" y="102" text-anchor="middle" fill="#d97706" font-size="8" font-family="monospace">Recursive</text>
+              <text x="120" y="115" text-anchor="middle" fill="#d97706" font-size="8" font-family="monospace">Splitter</text>
+              <rect x="170" y="70" width="64" height="54" rx="7" fill="#1a0d2e" stroke="#8b5cf6" stroke-width="1.2"/>
+              <text x="202" y="89" text-anchor="middle" fill="#c4b5fd" font-size="9" font-weight="600" font-family="monospace">EMBED</text>
+              <text x="202" y="102" text-anchor="middle" fill="#7c3aed" font-size="8" font-family="monospace">MiniLM</text>
+              <text x="202" y="115" text-anchor="middle" fill="#7c3aed" font-size="8" font-family="monospace">L6-v2</text>
+              <rect x="252" y="70" width="64" height="54" rx="7" fill="#0d1f2e" stroke="#06b6d4" stroke-width="1.2"/>
+              <text x="284" y="89" text-anchor="middle" fill="#67e8f9" font-size="9" font-weight="600" font-family="monospace">FAISS</text>
+              <text x="284" y="102" text-anchor="middle" fill="#0891b2" font-size="8" font-family="monospace">&lt;200ms</text>
+              <text x="284" y="115" text-anchor="middle" fill="#0891b2" font-size="8" font-family="monospace">retrieval</text>
+              <rect x="334" y="70" width="118" height="54" rx="7" fill="#0d1a0d" stroke="#10b981" stroke-width="1.2"/>
+              <text x="393" y="89" text-anchor="middle" fill="#6ee7b7" font-size="9" font-weight="600" font-family="monospace">LLM</text>
+              <text x="393" y="102" text-anchor="middle" fill="#059669" font-size="8" font-family="monospace">Gemini/OpenAI</text>
+              <text x="393" y="115" text-anchor="middle" fill="#059669" font-size="8" font-family="monospace">/Bedrock</text>
+              <rect x="88" y="148" width="220" height="38" rx="7" fill="#1a0a0a" stroke="#ef4444" stroke-width="1.2"/>
+              <text x="198" y="163" text-anchor="middle" fill="#fca5a5" font-size="9" font-weight="600" font-family="monospace">STRICT QA PROMPT</text>
+              <text x="198" y="177" text-anchor="middle" fill="#dc2626" font-size="8" font-family="monospace">anti-hallucination · citation-aware · "I don't know" guard</text>
+              <line x1="70" y1="97" x2="87" y2="97" stroke="#555" stroke-width="1.2" marker-end="url(#a2)"/>
+              <line x1="152" y1="97" x2="169" y2="97" stroke="#555" stroke-width="1.2" marker-end="url(#a2)"/>
+              <line x1="234" y1="97" x2="251" y2="97" stroke="#555" stroke-width="1.2" marker-end="url(#a2)"/>
+              <line x1="316" y1="97" x2="333" y2="97" stroke="#555" stroke-width="1.2" marker-end="url(#a2)"/>
+              <path d="M284 124 L284 148" stroke="#555" stroke-width="1.2" fill="none" marker-end="url(#a2)"/>
+              <path d="M308 163 L393 163 L393 125" stroke="#555" stroke-width="1.2" fill="none" marker-end="url(#a2)"/>
+            </svg>
+          </div>
+          <p class="proj-lbl">Key Decisions</p>
+          <div class="dlist">
+            <div class="ditem"><div class="dicon c"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><p class="dtxt"><strong>Anti-hallucination guard</strong> — returns "I don't know" when retrieved context doesn't support an answer, preventing confident fabrication</p></div>
+            <div class="ditem"><div class="dicon p"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><p class="dtxt"><strong>Volume-backed Docker persistence</strong> — FAISS index survives container restarts without re-ingestion</p></div>
+            <div class="ditem"><div class="dicon g"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><p class="dtxt"><strong>Metadata-filtered retrieval</strong> — queries scoped to specific source documents in multi-PDF knowledge bases</p></div>
+          </div>
+        </div>
+        <div class="project-right">
+          <p class="proj-lbl">Production Signals</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px;">
+            <div style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.2);border-radius:10px;padding:14px;"><div style="font-size:26px;font-weight:900;color:#10b981;">66</div><div style="font-size:12px;color:var(--txt2);">Pytest tests</div><div style="font-size:11px;color:var(--txt3);">100% pass rate</div></div>
+            <div style="background:rgba(6,182,212,0.06);border:1px solid rgba(6,182,212,0.2);border-radius:10px;padding:14px;"><div style="font-size:24px;font-weight:900;color:#06b6d4;">&lt;200ms</div><div style="font-size:12px;color:var(--txt2);">Retrieval latency</div><div style="font-size:11px;color:var(--txt3);">2–4s end-to-end</div></div>
+            <div style="background:rgba(139,92,246,0.06);border:1px solid rgba(139,92,246,0.2);border-radius:10px;padding:14px;"><div style="font-size:26px;font-weight:900;color:#8b5cf6;">4</div><div style="font-size:12px;color:var(--txt2);">Core modules</div><div style="font-size:11px;color:var(--txt3);">fully covered</div></div>
+            <div style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.2);border-radius:10px;padding:14px;"><div style="font-size:26px;font-weight:900;color:#f59e0b;">3</div><div style="font-size:12px;color:var(--txt2);">LLM providers</div><div style="font-size:11px;color:var(--txt3);">Gemini · OpenAI · Bedrock</div></div>
+          </div>
+          <p class="proj-lbl">CI/CD Pipeline</p>
+          <div class="dlist">
+            <div class="ditem"><div class="dicon g"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><p class="dtxt">GitHub Actions runs <strong>full pytest suite on every push</strong> + Docker build + deployment automation</p></div>
+            <div class="ditem"><div class="dicon c"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><p class="dtxt">Docker Compose with volume mounts — PDFs and FAISS index persist across container lifecycle</p></div>
+            <div class="ditem"><div class="dicon p"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><p class="dtxt">Page-level source citations in every answer — users trace responses back to document and page</p></div>
+          </div>
+          <div class="spills"><span class="spill">Python</span><span class="spill">LangChain</span><span class="spill">FAISS</span><span class="spill">sentence-transformers</span><span class="spill">Streamlit</span><span class="spill">Docker</span><span class="spill">GitHub Actions</span><span class="spill">OpenAI</span></div>
+        </div>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/Srikanth-coder-max/RAG" target="_blank" class="plink"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>View Source</a>
+        <span style="color:var(--txt3)">·</span>
+        <span style="font-size:12px;color:var(--txt3);">66 tests · Docker · GitHub Actions CI</span>
+      </div>
+    </div>
+
+    <!-- PROJECT 3 -->
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-meta"><span class="project-tag tag-cloud">Cloud Automation · AWS</span><span class="project-date">April 2026</span></div>
+        <h3 class="project-title">Intelligent Cloud Deployment Orchestration System</h3>
+        <p class="project-hook">A bad deployment to EC2 used to mean manual triage. This event-driven system watches health via CloudWatch, detects failures instantly via EventBridge, and triggers Lambda to roll back automatically — recovery in under 2 minutes, zero human intervention.</p>
+      </div>
+      <div class="project-body">
+        <div class="project-left">
+          <p class="proj-lbl">Architecture</p>
+          <div class="adiag">
+            <svg viewBox="0 0 460 200" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="a3" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#555"/></marker>
+                <marker id="a3r" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#ef4444"/></marker>
+                <marker id="a3c" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#06b6d4"/></marker>
+              </defs>
+              <!-- Happy path top row -->
+              <rect x="4" y="72" width="56" height="36" rx="7" fill="#0d1f2e" stroke="#3b82f6" stroke-width="1.2"/>
+              <text x="32" y="87" text-anchor="middle" fill="#93c5fd" font-size="9" font-weight="600" font-family="monospace">DEV</text>
+              <text x="32" y="100" text-anchor="middle" fill="#2563eb" font-size="8" font-family="monospace">git push</text>
+              <rect x="74" y="72" width="60" height="36" rx="7" fill="#111" stroke="#555" stroke-width="1.2"/>
+              <text x="104" y="87" text-anchor="middle" fill="#ccc" font-size="9" font-weight="600" font-family="monospace">GitHub</text>
+              <text x="104" y="100" text-anchor="middle" fill="#777" font-size="8" font-family="monospace">main</text>
+              <rect x="148" y="72" width="72" height="36" rx="7" fill="#1a0d2e" stroke="#8b5cf6" stroke-width="1.2"/>
+              <text x="184" y="87" text-anchor="middle" fill="#c4b5fd" font-size="9" font-weight="600" font-family="monospace">Pipeline</text>
+              <text x="184" y="100" text-anchor="middle" fill="#7c3aed" font-size="8" font-family="monospace">CodePipeline</text>
+              <rect x="234" y="72" width="72" height="36" rx="7" fill="#1a0d2e" stroke="#a855f7" stroke-width="1.2"/>
+              <text x="270" y="87" text-anchor="middle" fill="#d8b4fe" font-size="9" font-weight="600" font-family="monospace">Deploy</text>
+              <text x="270" y="100" text-anchor="middle" fill="#9333ea" font-size="8" font-family="monospace">CodeDeploy</text>
+              <rect x="320" y="60" width="134" height="60" rx="7" fill="#0d1a0d" stroke="#10b981" stroke-width="1.2"/>
+              <text x="387" y="78" text-anchor="middle" fill="#6ee7b7" font-size="9" font-weight="600" font-family="monospace">EC2 Instance</text>
+              <text x="387" y="91" text-anchor="middle" fill="#059669" font-size="8" font-family="monospace">app :8080</text>
+              <text x="387" y="104" text-anchor="middle" fill="#059669" font-size="8" font-family="monospace">AppSpec hooks</text>
+              <text x="387" y="113" text-anchor="middle" fill="#555" font-size="7" font-family="monospace">StatusCheckFailed ↓</text>
+              <!-- Failure path bottom row -->
+              <rect x="320" y="148" width="134" height="36" rx="7" fill="#1a0d0d" stroke="#ef4444" stroke-width="1.2"/>
+              <text x="387" y="163" text-anchor="middle" fill="#fca5a5" font-size="9" font-weight="600" font-family="monospace">CloudWatch</text>
+              <text x="387" y="177" text-anchor="middle" fill="#dc2626" font-size="8" font-family="monospace">StatusCheck Alarm</text>
+              <rect x="234" y="148" width="72" height="36" rx="7" fill="#1a1a0d" stroke="#f59e0b" stroke-width="1.2"/>
+              <text x="270" y="163" text-anchor="middle" fill="#fcd34d" font-size="9" font-weight="600" font-family="monospace">EventBridge</text>
+              <text x="270" y="177" text-anchor="middle" fill="#d97706" font-size="8" font-family="monospace">alarm rule</text>
+              <rect x="148" y="148" width="72" height="36" rx="7" fill="#0d1f2e" stroke="#06b6d4" stroke-width="1.2"/>
+              <text x="184" y="163" text-anchor="middle" fill="#67e8f9" font-size="9" font-weight="600" font-family="monospace">Lambda</text>
+              <text x="184" y="177" text-anchor="middle" fill="#0891b2" font-size="8" font-family="monospace">auto-rollback fn</text>
+              <!-- Arrows happy path -->
+              <line x1="60" y1="90" x2="73" y2="90" stroke="#555" stroke-width="1.2" marker-end="url(#a3)"/>
+              <line x1="134" y1="90" x2="147" y2="90" stroke="#555" stroke-width="1.2" marker-end="url(#a3)"/>
+              <line x1="220" y1="90" x2="233" y2="90" stroke="#555" stroke-width="1.2" marker-end="url(#a3)"/>
+              <line x1="306" y1="90" x2="319" y2="90" stroke="#555" stroke-width="1.2" marker-end="url(#a3)"/>
+              <!-- Failure arrows -->
+              <line x1="387" y1="120" x2="387" y2="147" stroke="#ef4444" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#a3r)"/>
+              <line x1="320" y1="166" x2="307" y2="166" stroke="#ef4444" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#a3r)"/>
+              <line x1="234" y1="166" x2="221" y2="166" stroke="#ef4444" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#a3r)"/>
+              <!-- Rollback -->
+              <path d="M148 166 L60 166 L60 44 L270 44 L270 71" stroke="#06b6d4" stroke-width="1.2" fill="none" stroke-dasharray="3,3" marker-end="url(#a3c)"/>
+              <text x="165" y="38" fill="#06b6d4" font-size="8" font-family="monospace">→ rollback last good revision</text>
+            </svg>
+          </div>
+          <p class="proj-lbl">Key Decisions</p>
+          <div class="dlist">
+            <div class="ditem"><div class="dicon g"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><p class="dtxt"><strong>Event-driven, not polling</strong> — CloudWatch alarm state change triggers EventBridge rule instantly; no cron, no manual check</p></div>
+            <div class="ditem"><div class="dicon c"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><p class="dtxt"><strong>IAM least-privilege</strong> — CodeDeploy, Lambda, EC2 roles separated with explicit scoped trust policies</p></div>
+            <div class="ditem"><div class="dicon p"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><p class="dtxt"><strong>AppSpec lifecycle hooks</strong> — stop.sh → install.sh → start.sh makes deployments fully observable</p></div>
+          </div>
+        </div>
+        <div class="project-right">
+          <p class="proj-lbl">AWS Services Orchestrated</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:24px;">
+            <div style="border:1px solid var(--border);border-radius:8px;padding:12px;"><div style="font-size:11px;font-weight:700;color:var(--green);margin-bottom:4px;">EC2 + CodeDeploy</div><div style="font-size:12px;color:var(--txt2);">Target compute + deployment lifecycle</div></div>
+            <div style="border:1px solid var(--border);border-radius:8px;padding:12px;"><div style="font-size:11px;font-weight:700;color:var(--amber);margin-bottom:4px;">CodePipeline</div><div style="font-size:12px;color:var(--txt2);">Source → build → deploy on git push</div></div>
+            <div style="border:1px solid var(--border);border-radius:8px;padding:12px;"><div style="font-size:11px;font-weight:700;color:#ef4444;margin-bottom:4px;">CloudWatch</div><div style="font-size:12px;color:var(--txt2);">StatusCheckFailed metric alarm</div></div>
+            <div style="border:1px solid var(--border);border-radius:8px;padding:12px;"><div style="font-size:11px;font-weight:700;color:var(--cyan);margin-bottom:4px;">Lambda</div><div style="font-size:12px;color:var(--txt2);">Finds last good rev, triggers rollback</div></div>
+            <div style="border:1px solid var(--border);border-radius:8px;padding:12px;"><div style="font-size:11px;font-weight:700;color:var(--amber);margin-bottom:4px;">EventBridge</div><div style="font-size:12px;color:var(--txt2);">Routes alarm state to Lambda target</div></div>
+            <div style="border:1px solid var(--border);border-radius:8px;padding:12px;"><div style="font-size:11px;font-weight:700;color:var(--purple);margin-bottom:4px;">IAM</div><div style="font-size:12px;color:var(--txt2);">Least-privilege roles per service</div></div>
+          </div>
+          <p class="proj-lbl">Impact</p>
+          <div class="dlist">
+            <div class="ditem"><div class="dicon g"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><p class="dtxt">Recovery time reduced to <strong>1–2 minutes</strong> from 15–30 minute manual triage</p></div>
+            <div class="ditem"><div class="dicon g"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><p class="dtxt"><strong>Zero manual intervention</strong> — detection-to-recovery runs fully autonomously</p></div>
+            <div class="ditem"><div class="dicon g"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><p class="dtxt"><strong>39 commits</strong> — most mature repo, real iteration on automation scripts and IAM policies</p></div>
+          </div>
+          <div class="spills"><span class="spill">AWS Lambda</span><span class="spill">CloudWatch</span><span class="spill">EventBridge</span><span class="spill">EC2</span><span class="spill">CodePipeline</span><span class="spill">CodeDeploy</span><span class="spill">IAM</span><span class="spill">S3</span><span class="spill">Python</span><span class="spill">GitHub Actions</span><span class="spill">AppSpec</span></div>
+        </div>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/Srikanth-coder-max/cloud-deployment-rollback-system" target="_blank" class="plink"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>View Source</a>
+        <span style="color:var(--txt3)">·</span>
+        <span style="font-size:12px;color:var(--txt3);">39 commits · 7 AWS services · fully automated</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── SKILLS ──────────────────────────────────────────────────────── -->
+<style>
+  #skills { background: var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .skills-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:24px; }
+  .skill-group { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:28px; transition:border-color 0.2s; }
+  .skill-group:hover { border-color:var(--border-hi); }
+  .skill-group-icon { width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:14px; }
+  .skill-group-title { font-size:13px; font-weight:700; color:var(--txt); letter-spacing:-0.01em; margin-bottom:6px; }
+  .skill-group-sub { font-size:12px; color:var(--txt3); margin-bottom:18px; }
+  .skill-items { display:flex; flex-wrap:wrap; gap:7px; }
+  .skill-chip { font-family:var(--mono); font-size:11.5px; padding:5px 11px; border-radius:7px; border:1px solid var(--border); color:var(--txt2); background:rgba(255,255,255,0.03); }
+</style>
+
+<section id="skills">
+  <div class="container">
+    <p class="section-tag">Skills</p>
+    <h2 class="section-title">Across the full<br/>AI engineering stack.</h2>
+    <p class="section-sub" style="margin-bottom:48px;">No rating bars. The projects above demonstrate depth — these are the tools I've shipped with.</p>
+    <div class="skills-grid">
+
+      <div class="skill-group">
+        <div class="skill-group-icon" style="background:rgba(139,92,246,0.12);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        </div>
+        <p class="skill-group-title">Agentic AI &amp; LLM Engineering</p>
+        <p class="skill-group-sub">Core specialization — shipped in all 3 projects</p>
+        <div class="skill-items">
+          <span class="skill-chip">LangChain</span>
+          <span class="skill-chip">RAG Pipelines</span>
+          <span class="skill-chip">Prompt Engineering</span>
+          <span class="skill-chip">Tool Calling</span>
+          <span class="skill-chip">AI Agents</span>
+          <span class="skill-chip">Context Management</span>
+          <span class="skill-chip">Semantic Search</span>
+          <span class="skill-chip">Hybrid Memory</span>
+          <span class="skill-chip">Anti-hallucination</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-icon" style="background:rgba(6,182,212,0.12);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <p class="skill-group-title">LLM &amp; AI Stack</p>
+        <p class="skill-group-sub">Multi-provider integration, local + cloud</p>
+        <div class="skill-items">
+          <span class="skill-chip">Groq API</span>
+          <span class="skill-chip">Gemini</span>
+          <span class="skill-chip">Ollama</span>
+          <span class="skill-chip">OpenAI</span>
+          <span class="skill-chip">faster-whisper</span>
+          <span class="skill-chip">sentence-transformers</span>
+          <span class="skill-chip">ChromaDB</span>
+          <span class="skill-chip">FAISS</span>
+          <span class="skill-chip">Vector Embeddings</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-icon" style="background:rgba(16,185,129,0.12);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <p class="skill-group-title">Programming &amp; Backend</p>
+        <p class="skill-group-sub">Python-first, API-focused</p>
+        <div class="skill-items">
+          <span class="skill-chip">Python</span>
+          <span class="skill-chip">FastAPI</span>
+          <span class="skill-chip">OOP</span>
+          <span class="skill-chip">JSON Handling</span>
+          <span class="skill-chip">SQL</span>
+          <span class="skill-chip">Git</span>
+          <span class="skill-chip">REST APIs</span>
+          <span class="skill-chip">Streamlit</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-icon" style="background:rgba(245,158,11,0.12);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <p class="skill-group-title">Cloud &amp; DevOps</p>
+        <p class="skill-group-sub">AWS Certified — production deployments</p>
+        <div class="skill-items">
+          <span class="skill-chip">AWS Lambda</span>
+          <span class="skill-chip">CloudWatch</span>
+          <span class="skill-chip">EventBridge</span>
+          <span class="skill-chip">EC2</span>
+          <span class="skill-chip">CodePipeline</span>
+          <span class="skill-chip">CodeDeploy</span>
+          <span class="skill-chip">IAM</span>
+          <span class="skill-chip">S3</span>
+          <span class="skill-chip">Docker</span>
+          <span class="skill-chip">GitHub Actions</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-icon" style="background:rgba(139,92,246,0.12);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+        </div>
+        <p class="skill-group-title">Databases &amp; Storage</p>
+        <p class="skill-group-sub">Relational + vector stores</p>
+        <div class="skill-items">
+          <span class="skill-chip">ChromaDB</span>
+          <span class="skill-chip">FAISS</span>
+          <span class="skill-chip">SQLite</span>
+          <span class="skill-chip">MySQL</span>
+          <span class="skill-chip">Vector DBs</span>
+          <span class="skill-chip">JSON stores</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-icon" style="background:rgba(6,182,212,0.12);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <p class="skill-group-title">Developer Tools</p>
+        <p class="skill-group-sub">Toolchain &amp; environment</p>
+        <div class="skill-items">
+          <span class="skill-chip">GitHub Actions CI</span>
+          <span class="skill-chip">Docker Compose</span>
+          <span class="skill-chip">AppSpec / BuildSpec</span>
+          <span class="skill-chip">.env config</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── TIMELINE ─────────────────────────────────────────────────────── -->
+<style>
+  #timeline { background: var(--bg); }
+  .timeline { position:relative; padding-left:32px; }
+  .timeline::before { content:''; position:absolute; left:0; top:8px; bottom:8px; width:1px; background:var(--border); }
+  .tl-item { position:relative; margin-bottom:40px; }
+  .tl-item:last-child { margin-bottom:0; }
+  .tl-dot { position:absolute; left:-37px; top:6px; width:10px; height:10px; border-radius:50%; background:var(--bg); border:2px solid var(--border-hi); }
+  .tl-dot.active { border-color:var(--purple); background:var(--purple); box-shadow:0 0 0 3px rgba(139,92,246,0.2); }
+  .tl-dot.cyan { border-color:var(--cyan); background:var(--cyan); box-shadow:0 0 0 3px rgba(6,182,212,0.2); }
+  .tl-dot.green { border-color:var(--green); background:var(--green); box-shadow:0 0 0 3px rgba(16,185,129,0.2); }
+  .tl-dot.amber { border-color:var(--amber); background:var(--amber); box-shadow:0 0 0 3px rgba(245,158,11,0.2); }
+  .tl-date { font-size:12px; color:var(--txt3); font-family:var(--mono); margin-bottom:6px; }
+  .tl-title { font-size:16px; font-weight:700; color:var(--txt); letter-spacing:-0.02em; margin-bottom:4px; }
+  .tl-sub { font-size:13px; color:var(--txt2); }
+  .tl-badge { display:inline-block; font-size:10px; font-weight:600; padding:2px 8px; border-radius:4px; margin-left:8px; vertical-align:middle; }
+</style>
+
+<section id="timeline">
+  <div class="container">
+    <p class="section-tag">Engineering Timeline</p>
+    <h2 class="section-title">How I got here.</h2>
+    <p class="section-sub" style="margin-bottom:56px;">Education, certifications, and the systems I shipped along the way.</p>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dot active"></div>
+        <p class="tl-date">April 2026</p>
+        <p class="tl-title">Intelligent Cloud Deployment Orchestration System</p>
+        <p class="tl-sub">Event-driven AWS pipeline with automated EC2 rollback via CloudWatch + EventBridge + Lambda. 39 commits, 7 AWS services, &lt;2 min recovery.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot cyan"></div>
+        <p class="tl-date">March 2026</p>
+        <p class="tl-title">ContextualVoice — Agentic AI Voice Assistant</p>
+        <p class="tl-sub">Full agentic pipeline with 3-tier memory, RAG, STT/TTS, and live tool execution. Live Streamlit deployment. Multi-LLM (Groq/Gemini/Ollama).</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot amber"></div>
+        <p class="tl-date">November 2025</p>
+        <p class="tl-title">Agentic RAG Document Intelligence System</p>
+        <p class="tl-sub">Production RAG system with 66 automated tests at 100% pass rate. FAISS &lt;200ms retrieval, Docker CI/CD, multi-provider LLM, anti-hallucination prompting.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot green"></div>
+        <p class="tl-date">2024</p>
+        <p class="tl-title">AWS Certified Cloud Practitioner</p>
+        <p class="tl-sub">Amazon Web Services — validated cloud fundamentals, services architecture, and security best practices.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot green"></div>
+        <p class="tl-date">2024</p>
+        <p class="tl-title">Machine Learning A–Z: AI, Python</p>
+        <p class="tl-sub">Udemy — supervised/unsupervised learning, regression, classification, clustering, NLP, and deep learning foundations.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot green"></div>
+        <p class="tl-date">2023</p>
+        <p class="tl-title">Complete DSA in Python &amp; Image Processing with CNNs</p>
+        <p class="tl-sub">Udemy (DSA) + VIT VAC (CNNs) — algorithmic foundations and convolutional neural network image processing.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot active"></div>
+        <p class="tl-date">2022 – Present (Expected 2027)</p>
+        <p class="tl-title">Vellore Institute of Technology — Integrated M.Tech Software Engineering
+          <span class="tl-badge" style="background:rgba(139,92,246,0.12);color:var(--purple);">CGPA 8.27</span>
+        </p>
+        <p class="tl-sub">5-year integrated program at VIT Vellore, Katpadi, Tamil Nadu. Specializing in AI systems, distributed computing, and software architecture.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ──────────────────────────────────────────────────────── -->
+<style>
+  #contact { background: var(--surface); border-top:1px solid var(--border); }
+  .contact-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 64px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-card::before {
+    content:''; position:absolute; inset:0; pointer-events:none;
+    background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(139,92,246,0.08) 0%, transparent 70%);
+  }
+  .contact-title { font-size:clamp(28px,4vw,48px); font-weight:900; letter-spacing:-0.04em; color:var(--txt); margin-bottom:16px; }
+  .contact-sub { font-size:16px; color:var(--txt2); max-width:500px; margin:0 auto 40px; line-height:1.6; }
+  .contact-actions { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-bottom:40px; }
+  .contact-links { display:flex; flex-wrap:wrap; gap:24px; justify-content:center; }
+  .contact-link { display:flex; align-items:center; gap:6px; font-size:13px; color:var(--txt3); transition:color 0.2s; }
+  .contact-link:hover { color:var(--txt2); }
+  @media(max-width:600px){ .contact-card{ padding:40px 24px; } }
+</style>
+
+<section id="contact">
+  <div class="container">
+    <div class="contact-card">
+      <p class="section-tag" style="margin-bottom:16px;">Get In Touch</p>
+      <h2 class="contact-title">Let's build something<br/>that matters.</h2>
+      <p class="contact-sub">Open to Agentic AI, LLM Engineering, RAG, and Applied AI internship opportunities. I ship production-grade systems — let's talk.</p>
+      <div class="contact-actions">
+        <a href="mailto:srikanthnarayanasamy60@gmail.com" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Send Email
+        </a>
+        <a href="https://linkedin.com/in/srikanth-babu-s-n" target="_blank" class="btn-ghost">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/Srikanth-coder-max" target="_blank" class="btn-ghost">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+          GitHub
+        </a>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:srikanthnarayanasamy60@gmail.com" class="contact-link">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          srikanthnarayanasamy60@gmail.com
+        </a>
+        <a href="tel:+916383423774" class="contact-link">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.4 19.79 19.79 0 0 1 1.6 4.76 2 2 0 0 1 3.56 2.58l3-.01a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 10.1a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          +91 6383423774
+        </a>
+        <span class="contact-link">VIT Vellore · M.Tech SE · Class of 2027</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ───────────────────────────────────────────────────────── -->
+<footer style="background:var(--bg);border-top:1px solid var(--border);padding:32px 0;">
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+    <span style="font-size:13px;color:var(--txt3);">Srikanth Babu S N — Agentic AI Engineer</span>
+    <div style="display:flex;gap:20px;">
+      <a href="https://github.com/Srikanth-coder-max" target="_blank" style="font-size:12px;color:var(--txt3);transition:color 0.2s;" onmouseover="this.style.color='var(--txt2)'" onmouseout="this.style.color='var(--txt3)'">GitHub</a>
+      <a href="https://linkedin.com/in/srikanth-babu-s-n" target="_blank" style="font-size:12px;color:var(--txt3);transition:color 0.2s;" onmouseover="this.style.color='var(--txt2)'" onmouseout="this.style.color='var(--txt3)'">LinkedIn</a>
+      <a href="mailto:srikanthnarayanasamy60@gmail.com" style="font-size:12px;color:var(--txt3);transition:color 0.2s;" onmouseover="this.style.color='var(--txt2)'" onmouseout="this.style.color='var(--txt3)'">Email</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ── JAVASCRIPT ───────────────────────────────────────────────────── -->
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('nav');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const sections = document.querySelectorAll('section[id]');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+
+    // Active nav link
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.remove('active');
+      if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+    });
+  });
+
+  // Intersection Observer for fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.project-card, .skill-group, .tl-item, .impact-cell').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+
+  // Mobile nav toggle (hide links on small screen)
+  const mq = window.matchMedia('(max-width: 640px)');
+  function handleMQ(e) {
+    document.querySelector('.nav-links').style.display = e.matches ? 'none' : 'flex';
+  }
+  mq.addEventListener('change', handleMQ);
+  handleMQ(mq);
+</script>
+
+</body>
+</html>
